@@ -1,14 +1,15 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { RootState } from "./store";
 
 interface UserInfos {
   isAuthOk: boolean;
   isLoading: boolean;
 }
 
-const getUser = (state: any) => state.oidc.user;
-const getLoadingUserInfo = (state: any) => state.oidc.isLoadingUser;
+const getUser = (state: RootState) => state.oidc.user;
+const getLoadingUserInfo = (state: RootState) => state.oidc.isLoadingUser;
 export const selectUserInfos = createSelector(
-  (state) => getUser(state),
+  (state: RootState) => getUser(state),
   (state) => getLoadingUserInfo(state),
   (user, loadingInfo): UserInfos => {
     return {
@@ -18,5 +19,5 @@ export const selectUserInfos = createSelector(
   }
 );
 
-export const GetUserName = (state: any): string =>
+export const GetUserName = (state: RootState): string | undefined =>
   state.oidc.user?.profile?.sub;

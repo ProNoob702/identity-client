@@ -1,6 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { reducer as oidcReducer } from "redux-oidc";
 
-export const rootReducer = combineReducers({});
+export const rootReducer = combineReducers({
+  oidc: oidcReducer,
+});
 
 const store = configureStore({
   reducer: rootReducer,
@@ -9,4 +12,5 @@ const store = configureStore({
 });
 
 export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof rootReducer>;
 export default store;
